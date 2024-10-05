@@ -95,7 +95,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //nếu khởi tạo các biến trong hàm init thì sẽ tí nữa sẽ không thể tương tác với bên ngoài hàm được
             
                 //Đặt tên cửa sổ chương trình là Ceasar Cipher o((>ω< ))o
-		this.setTitle("Ceasar Cipher o((>ω< ))o");
+		this.setTitle("Encryption Application o((>ω< ))o");
                 //Đặt kích thước của chương trình với chiều rộng 600, chiều cao 600
 		this.setSize(1015,600);
                 //Đặt vị trí đặt ban đầu của cửa sổ chương trình là ở giữa màn hình
