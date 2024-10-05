@@ -1,11 +1,13 @@
 //Khai báo package hochiminh.model
 package encryption.business_logic_layer;
 
+import javax.swing.JOptionPane;
+
 public class Encryption_Ceasar_BLL {
         //Khai báo Plaintext để lưu trữ giá trị plantext muốn mã hóa hoặc giải mã
 	private String plainText;
         //Khai báo key để lưu trữ giá trị key
-	private int key;
+	private String key;
         //Khai báo Cypher để lưu trữ kết quả trả về là đoạn mã đã mã hóa hoặc đoạn mã đã giải mã
 	private String cypher;
 
@@ -20,10 +22,10 @@ public class Encryption_Ceasar_BLL {
 	public void setPlainText(String plainText) {
 		this.plainText = plainText;
 	}
-	public int getKey() {
+	public String getKey() {
 		return key;
 	}
-	public void setKey(int key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 	public String getCypher() {
@@ -33,8 +35,8 @@ public class Encryption_Ceasar_BLL {
 		this.cypher = cypher;
 	}
 	
-	//Đây là hàm mã hóa encryption
-	public void encrytion(){
+	//Đây là hàm mã hóa encryption của Ceasar
+	public void encrytion_Ceasar(){
                 //Tạo chuỗi lưu trữ các giá trị từ A->Z phục vụ cho mã hóa và giải mã
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 //Lưu giá trị chuỗi bảng chữ cái vào từng thành phần của mảng
@@ -45,7 +47,7 @@ public class Encryption_Ceasar_BLL {
 		char[] arrayResult = new char[plainTextArray.length];
                 //Tạo 1 biến để lưu trữ vị trí cho mảng arrayResult
 		int bientam=0;
-                
+                    
         //plainTextAR dùng để đánh dấu để sau này sau khi kết thúc vòng lặp thì tiếp tục quay trở lại vòng lặp plainTextAR
                     //Vòng for này chạy từ tới cuối của mảng plainTextArray nhằm so sánh từng ký tự của plaintext nhập vào
 	plainTextAR:for (int i = 0; i <plainTextArray.length; i++) 
@@ -55,7 +57,8 @@ public class Encryption_Ceasar_BLL {
 				if(plainTextArray[i]==arrayAlphabet[j])
 				{       //Tạo biến kết quả để lưu trữ giá trị vị trí ký tự của mảng arrayAlphabet sau khi thực hiện phép tính
                                         //Đối với mã hóa thì công thức là bằng (số tương ứng với ký tự trong plaintext + key) mod 26
-					int result = (j+this.key) % 26;
+                                        int keyString = Integer.parseInt(key);
+					int result = (j+keyString) % 26;
                                         //Vòng for này để chạy từ đầu bảng chữ cái Alphabet để dò vị trí trong mảng arrayAlphabet
 					for (int k = 0; k < arrayAlphabet.length; k++) 
 					{       //So sánh để xem vị trí của biến kết quả có bằng cái vị trí vòng for này đang chạy không
@@ -68,6 +71,7 @@ public class Encryption_Ceasar_BLL {
 							continue plainTextAR;
 						}
 					}
+                              
 				}
 			}
 		}
@@ -76,8 +80,8 @@ public class Encryption_Ceasar_BLL {
 	}
         
         
-        //Đây là hàm giải mã decryption
-	public void decryption() {
+        //Đây là hàm giải mã decryption của Ceasar
+	public void decryption_Ceasar() {
 		       //Tạo chuỗi lưu trữ các giá trị từ A->Z phục vụ cho mã hóa và giải mã
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 //Lưu giá trị chuỗi bảng chữ cái vào từng thành phần của mảng
@@ -98,7 +102,8 @@ public class Encryption_Ceasar_BLL {
 				if(plainTextArray[i]==arrayAlphabet[j])
 				{       //Tạo biến kết quả để lưu trữ giá trị vị trí ký tự của mảng arrayAlphabet sau khi thực hiện phép tính
                                         //Đối với giải mã thì công thức là bằng (số tương ứng với ký tự trong plaintext - key) mod 26
-					int result = (j-this.key) % 26;
+					int keyString = Integer.parseInt(key);
+					int result = (j-keyString) % 26;
                                         //Vòng for này để chạy từ đầu bảng chữ cái Alphabet để dò vị trí trong mảng arrayAlphabet
 					for (int k = 0; k < arrayAlphabet.length; k++) 
 					{       //So sánh để xem vị trí của biến kết quả có bằng cái vị trí vòng for này đang chạy không
@@ -117,5 +122,48 @@ public class Encryption_Ceasar_BLL {
         //Gán giá trị từ mảng arrayResult thành chuỗi trong biến Cypher
 	this.cypher= new String(arrayResult);
 	}
-	
+        
+        //Đây là hàm mã hóa encryption của 
+        public void encryption_Playfair()
+        {
+            
+        }
+        //Đây là hàm giải mã decryption của 
+	public void decryption_Playfair()
+        {
+            
+        }
+        
+        //Đây là hàm mã hóa encryption của Vigenere
+        public void encryption_Vigenere()
+        {
+            
+        }
+        //Đây là hàm giải mã decryption của Vigenere
+	public void decryption_Vigenere()
+        {
+            
+        }
+        
+        //Đây là hàm mã hóa encryption của BangChuDon
+        public void encryption_BangChuDon()
+        {
+            
+        }
+        //Đây là hàm giải mã decryption của 
+	public void decryption_BangChuDon()
+        {
+            
+        }
+        
+        //Đây là hàm mã hóa encryption của ChuyenDichDong
+        public void encryption_ChuyenDichDong()
+        {
+            
+        }
+        //Đây là hàm giải mã decryption của 
+	public void decryption_ChuyenDichDong()
+        {
+            
+        }
 }
