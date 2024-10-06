@@ -258,8 +258,27 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
+                
                 //Trường hợp thỏa mãn 2 điều kiện Ceasar là PlainText là String và Key là Interger
-                if(!isInteger(plainText) && isInteger(key))
+                else if(!isInteger(plainText) && isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -269,6 +288,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.encrytion_Ceasar();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && isInteger(key))
@@ -297,8 +319,26 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện Ceasar là PlainText là String và Key là Interger
-                if(!isInteger(plainText) && isInteger(key))
+                else if(!isInteger(plainText) && isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -308,6 +348,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.decryption_Ceasar();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && isInteger(key))
@@ -336,6 +379,24 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện BangChuDon là PlainText và Key là String
                 if(!isInteger(plainText) && !isInteger(key))
                 {
@@ -347,6 +408,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.encryption_BangChuDon();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -375,8 +439,26 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện BangChuDon là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -386,6 +468,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.decryption_BangChuDon();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -414,8 +499,26 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện Playfair là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -425,7 +528,11 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.encryption_Playfair();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
+                
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
                 {
@@ -453,8 +560,26 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện Playfair là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -464,6 +589,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.decryption_Playfair();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -492,8 +620,26 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Tạo và khởi tạo biến key để lưu trữ giá trị của ô key sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_Key.getText()
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
                 //Trường hợp thỏa mãn 2 điều kiện Vigenre là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -503,6 +649,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.encryption_Vigenere();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -532,7 +681,25 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
                 //Trường hợp thỏa mãn 2 điều kiện Vigenere là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -542,6 +709,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.decryption_Vigenere();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -571,7 +741,25 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
                 //Trường hợp thỏa mãn 2 điều kiện chuyenDichDong là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -581,6 +769,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.encryption_ChuyenDichDong();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
@@ -610,7 +801,25 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 //Do khi nhập key từ ô bên trên thì giá trị sẽ là kiểu String nên phải đổi sang kiểu Int
 		String key = area_Key.getText();
                 //Trường hợp thỏa mãn 2 điều kiện chuyenDichDong là PlainText và Key là String
-                if(!isInteger(plainText) && !isInteger(key))
+                //Kiểm tra trường hợp nếu plainText và key bị rỗng
+                if(plainText.equals("") && key.equals(""))
+                {
+                   //Xuất ra màn hình thông báo Your Plain Text and your key are null
+                    this.area_CypherText.setText("Your Plain Text and your key are null");
+                }
+                //Kiểm tra trường hợp nếu plainText bị rỗng
+                else if(plainText.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your Plain Text is null
+                    this.area_CypherText.setText("Your Plain Text is null");
+                }
+                //Kiểm tra trường hợp nếu Key bị rỗng
+                else if(key.equals(""))
+                {
+                    //Xuất ra màn hình thông báo your key is null
+                    this.area_CypherText.setText("Your Key is null");
+                }
+                else if(!isInteger(plainText) && !isInteger(key))
                 {
                 //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
 		this.model.setPlainText(plainText);
@@ -620,6 +829,9 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.decryption_ChuyenDichDong();
                 //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
 		this.area_CypherText.setText(this.model.getCypher());
+                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && !isInteger(key))
