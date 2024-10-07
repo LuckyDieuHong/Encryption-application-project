@@ -13,7 +13,6 @@ public class Encryption_BLL {
 
 	//Tạo constructor Encryption_Ceasar_model với giá trị rỗng để khởi tạo ban đầu không có giá trị
 	public Encryption_BLL() {
-           // this.cypher="";
 	}
         
         //Bên dưới là các hàm getter và setter để lấy giá trị và đặt giá trị từ 3 biến đã khai báo bên trên
@@ -135,18 +134,7 @@ public class Encryption_BLL {
             
         }
         
-        //Đây là hàm mã hóa encryption của Vigenere
-        public void encryption_Vigenere()
-        {
-            
-        }
-        //Đây là hàm giải mã decryption của Vigenere
-	public void decryption_Vigenere()
-        {
-            
-        }
-        
-        //Đây là hàm mã hóa encryption của BangChuDon
+                //Đây là hàm mã hóa encryption của BangChuDon
         public void encryption_BangChuDon()
         {
             
@@ -158,6 +146,69 @@ public class Encryption_BLL {
         }
         
         
+        //Đây là hàm mã hóa encryption của Vigenere
+        public void encryption_Vigenere()
+        {
+            		char[]kq=new char[100];
+		char[] nkey= key.toCharArray();
+		char[] plaint= plainText.toCharArray();
+		char[] them=new char[1000];
+		int n=0;
+		for(int i=0;i<nkey.length;i++)
+			them[n++]=nkey[i];
+			if(nkey.length< plaint.length)
+			{
+				int len=0;
+				for(int k=0;k<(plaint.length-nkey.length);k++)
+				{
+					if(len<nkey.length)
+					them[n++]=nkey[len];
+					else 
+						len=0;
+					len++; 
+				}
+			}
+			int skq=0;
+			for(int j=0;j<n;j++)
+			{
+				kq[skq++]=((char)((plaint[j]+them[j])%26+65));
+			}
+			cypher=new String(kq);
+        }
+        //Đây là hàm giải mã decryption của Vigenere
+	public void decryption_Vigenere()
+        {
+            char[]kq=new char[100];
+		char[] nkey= key.toCharArray();
+		char[] cyp= plainText.toCharArray();
+		char[] them=new char[1000];
+		int n=0;
+		for(int i=0;i<nkey.length;i++)
+			them[n++]=nkey[i];
+			if(nkey.length< cyp.length)
+			{
+				int len=0;
+				for(int k=0;k<(cyp.length-nkey.length);k++)
+				{
+					if(len<nkey.length)
+					them[n++]=nkey[len];
+					else 
+						len=0;
+					len++; 
+				}
+			}
+			int skq=0;
+			for(int j=0;j<n;j++)
+			{
+				if((cyp[j]-them[j])<0)
+				kq[skq++]=((char)((26+cyp[j]-them[j])%26+65));
+				else
+					kq[skq++]=((char)((cyp[j]-them[j])%26+65));
+
+			}
+			cypher=new String(kq);
+        }
+      
         public int timViTriMin(char[] nkey) {
             int luu = 0;
             int min = nkey[0];
@@ -176,75 +227,60 @@ public class Encryption_BLL {
         public void encryption_ChuyenDichDong()
         {
             char[] nkey = key.toCharArray();
-            char[] plaint = plainText.toCharArray();
-            char[]nplaint =new char[100];
-            int n=0;
-            for(int i=0;i<plaint.length;i++)
-                nplaint[n++]=plaint[i];
-                if(n%nkey.length!=0)
-                {
-                    while(n%nkey.length!=0)
-                    {
-                        nplaint[n++]='Z';                    
-                    }
-                }
-		char[][] maTran = new char[n/nkey.length][nkey.length];
-		int k=0;
-		for(int i=0;i<n/nkey.length;i++)
-                {
-                    for(int j=0;j<nkey.length;j++) 
-                    {
-                        maTran[i][j]=nplaint[k];
-			k++;
-                    }
-                }
-			
-		for(int i=0;i<nkey.length;i++)
-		{
-			int luu=timViTriMin(nkey);
-			for (int j = 0; j < n/nkey.length; j++)
-			System.out.print(maTran[j][luu]);
-			nkey[luu]= (char)(91);
+		char[] plaint = plainText.toCharArray();
+		char[] nplaint = new char[100];
+		int n = 0;
+		for (int i = 0; i < plaint.length; i++)
+			nplaint[n++] = plaint[i];
+		if (n % nkey.length != 0)
+			while (n % nkey.length != 0)
+				nplaint[n++] = 'Z';
+		char[][] maTran = new char[n / nkey.length][nkey.length];
+		char kq[] = new char[n];
+		int skq = 0;
+		int k = 0;
+		for (int i = 0; i < n / nkey.length; i++)
+			for (int j = 0; j < nkey.length; j++) {
+				maTran[i][j] = nplaint[k];
+				k++;
+			}
+		for (int i = 0; i < nkey.length; i++) {
+			int luu = timViTriMin(nkey);
+			for (int j = 0; j < n / nkey.length; j++) {
+				kq[skq++] = maTran[j][luu];
+			}
+			nkey[luu] = (char) (91);
 		}
-                
-            this.cypher = new String(nplaint);    
-//            char totalNumberOfElements = 0;    
-//            for (char[] numbers : maTran)
-//            {
-//                totalNumberOfElements += numbers.length;
-//            }
-//            char[] actual = new char[totalNumberOfElements];
-//            int position = 0;
-//            for (char[] numbers : maTran ){
-//                for (char number : numbers) {
-//                    actual[position] = number;
-//                     ++position;
-//                } 
-        
+		cypher = new String(kq);
     }
-        //Đây là hàm giải mã decryption của 
+        //Đây là hàm giải mã decryption của ChuyenDichDong
 	public void decryption_ChuyenDichDong()
         {
             char[] nkey = key.toCharArray();
-		char[] plaint = cypher.toCharArray();
-		char[]nplaint =new char[100];
-		int n=0;
-		for(int i=0;i<plaint.length;i++)
-		nplaint[n++]=plaint[i];
-		if(n%nkey.length!=0)
-			while(n%nkey.length!=0)
-				nplaint[n++]='Z';
-		char[][] maTran = new char[n/nkey.length][nkey.length];
-		int k=0;
-		for(int i=0;i<nkey.length;i++)
-		{
-			int luu=timViTriMin(nkey);
-			for (int j = 0; j < n/nkey.length; j++)
-				maTran[j][luu]=nplaint[k++];
-			nkey[luu]= (char)(91);
+		char[] plaint = plainText.toCharArray();
+		char[] nplaint = new char[100];
+		int n = 0;
+		for (int i = 0; i < plaint.length; i++)
+			nplaint[n++] = plaint[i];
+		if (n % nkey.length != 0)
+			while (n % nkey.length != 0)
+				nplaint[n++] = 'Z';
+		char kq[] = new char[n];
+		int skq = 0;
+		char[][] maTran = new char[n / nkey.length][nkey.length];
+		int k = 0;
+		for (int i = 0; i < nkey.length; i++) {
+			int luu = timViTriMin(nkey);
+			for (int j = 0; j < n / nkey.length; j++)
+                        {
+                            maTran[j][luu] = nplaint[k++];                           
+                        }
+			nkey[luu] = (char) (91);
 		}
-		for(int i=0;i<n/nkey.length;i++)
-			for(int j=0;j<nkey.length;j++)
-				System.out.print(maTran[i][j]+"");
+		for (int i = 0; i < n / nkey.length; i++)
+			for (int j = 0; j < nkey.length; j++) {
+				kq[skq++] = maTran[i][j];
+			}
+		cypher = new String(kq);
         }
 }
