@@ -148,64 +148,93 @@ public class Encryption_BLL {
         
         //Đây là hàm mã hóa encryption của Vigenere
         public void encryption_Vigenere()
-        {
-            		char[]kq=new char[100];
+        {   
+                // Mảng để lưu kết quả mã hóa
+            	char[]kq=new char[100];
+                // Chuyển key và plaintext thành mảng ký tự
 		char[] nkey= key.toCharArray();
 		char[] plaint= plainText.toCharArray();
+                // Mảng để lưu khóa lặp lại
 		char[] them=new char[1000];
 		int n=0;
-		for(int i=0;i<nkey.length;i++)
-			them[n++]=nkey[i];
-			if(nkey.length< plaint.length)
-			{
-				int len=0;
-				for(int k=0;k<(plaint.length-nkey.length);k++)
-				{
-					if(len<nkey.length)
-					them[n++]=nkey[len];
-					else 
-						len=0;
-					len++; 
-				}
-			}
+		// Lặp qua từng ký tự trong khóa
+                for (int i = 0; i < nkey.length; i++) {
+                    // Sao chép ký tự khóa vào mảng them
+                    them[n++] = nkey[i];
+                }
+                // Nếu độ dài khóa ngắn hơn độ dài văn bản gốc
+                if (nkey.length < plaint.length) {
+                    // Khởi tạo biến len để giữ vị trí ký tự trong khóa
+                    int len = 0;
+                    // Lặp để sao chép các ký tự khóa còn thiếu vào mảng them
+                    for (int k = 0; k < (plaint.length - nkey.length); k++) {
+                        // Nếu chưa hết các ký tự trong khóa
+                        if (len < nkey.length) {
+                            // Sao chép ký tự khóa tại vị trí len vào mảng them
+                            them[n++] = nkey[len];
+                        } else {
+                            // Đặt lại len về 0 để bắt đầu lại từ đầu khóa
+                            len = 0;
+                        }
+                        // Tăng biến len lên 1 để lấy ký tự tiếp theo trong khóa
+                        len++;
+                    }
+                }
 			int skq=0;
 			for(int j=0;j<n;j++)
 			{
+                                // Tính ký tự mã hóa: cộng giá trị ASCII của ký tự gốc và ký tự khóa, lấy phần dư khi chia cho 26,
+                                // sau đó cộng thêm 65 để chuyển về ký tự ASCII của chữ cái in hoa
 				kq[skq++]=((char)((plaint[j]+them[j])%26+65));
 			}
+                        //Đưa vào hàm kết quả bằng cách gán mảng kết quả vào
 			cypher=new String(kq);
         }
         //Đây là hàm giải mã decryption của Vigenere
 	public void decryption_Vigenere()
         {
-            char[]kq=new char[100];
-		char[] nkey= key.toCharArray();
-		char[] cyp= plainText.toCharArray();
-		char[] them=new char[1000];
-		int n=0;
-		for(int i=0;i<nkey.length;i++)
-			them[n++]=nkey[i];
-			if(nkey.length< cyp.length)
-			{
-				int len=0;
-				for(int k=0;k<(cyp.length-nkey.length);k++)
-				{
-					if(len<nkey.length)
-					them[n++]=nkey[len];
-					else 
-						len=0;
-					len++; 
-				}
-			}
+                // Mảng để lưu kết quả giải mã
+                char[] kq = new char[100];
+                 // Chuyển khóa và văn bản mã hóa thành mảng ký tự
+                char[] nkey = key.toCharArray();
+                char[] cyp = plainText.toCharArray();
+                // Mảng để lưu khóa lặp lại
+                char[] them = new char[1000];
+                int n = 0;
+                // Lặp qua từng ký tự trong khóa
+                for(int i=0; i<nkey.length; i++) {
+                    // Sao chép ký tự khóa vào mảng them và tăng chỉ số của mảng them
+                    them[n++] = nkey[i];
+                }
+                // Nếu độ dài khóa ngắn hơn độ dài văn bản mã hóa
+                if(nkey.length < cyp.length) {
+                    // Khởi tạo biến len để theo dõi vị trí ký tự trong khóa
+                    int len = 0;
+                    // Lặp để sao chép các ký tự khóa còn thiếu vào mảng them
+                    for(int k=0; k<(cyp.length-nkey.length); k++) {
+                        // Nếu chưa hết các ký tự trong khóa
+                        if(len < nkey.length) {
+                            // Sao chép ký tự khóa tại vị trí len vào mảng them
+                            them[n++] = nkey[len];
+                        } else {
+                            // Đặt lại len về 0 để bắt đầu lại từ đầu khóa
+                            len = 0;
+                        }
+                        // Tăng biến len lên 1 để lấy ký tự tiếp theo trong khóa
+                        len++;
+                    }
+                }
 			int skq=0;
-			for(int j=0;j<n;j++)
-			{
-				if((cyp[j]-them[j])<0)
-				kq[skq++]=((char)((26+cyp[j]-them[j])%26+65));
-				else
-					kq[skq++]=((char)((cyp[j]-them[j])%26+65));
-
-			}
+			for (int j = 0; j < n; j++) {
+                        // Tính ký tự giải mã: trừ giá trị ASCII của ký tự mã hóa với ký tự khóa
+                        // Nếu kết quả âm, cộng thêm 26 để tránh âm trước khi lấy phần dư
+                            if ((cyp[j] - them[j]) < 0) {
+                                kq[skq++] = ((char)((26 + cyp[j] - them[j]) % 26 + 65));
+                            }else{
+                                kq[skq++] = ((char)((cyp[j] - them[j]) % 26 + 65));
+                            }
+                        }
+                        //Đưa vào hàm kết quả bằng cách gán mảng kết quả vào
 			cypher=new String(kq);
         }
       
@@ -226,61 +255,91 @@ public class Encryption_BLL {
         //Đây là hàm mã hóa encryption của ChuyenDichDong
         public void encryption_ChuyenDichDong()
         {
-            char[] nkey = key.toCharArray();
-		char[] plaint = plainText.toCharArray();
-		char[] nplaint = new char[100];
-		int n = 0;
-		for (int i = 0; i < plaint.length; i++)
-			nplaint[n++] = plaint[i];
-		if (n % nkey.length != 0)
-			while (n % nkey.length != 0)
-				nplaint[n++] = 'Z';
-		char[][] maTran = new char[n / nkey.length][nkey.length];
-		char kq[] = new char[n];
-		int skq = 0;
-		int k = 0;
-		for (int i = 0; i < n / nkey.length; i++)
-			for (int j = 0; j < nkey.length; j++) {
-				maTran[i][j] = nplaint[k];
-				k++;
-			}
-		for (int i = 0; i < nkey.length; i++) {
-			int luu = timViTriMin(nkey);
-			for (int j = 0; j < n / nkey.length; j++) {
-				kq[skq++] = maTran[j][luu];
-			}
-			nkey[luu] = (char) (91);
-		}
-		cypher = new String(kq);
+           // Chuyển khóa và văn bản gốc thành mảng ký tự
+           char[] nkey = key.toCharArray();
+           char[] plaint = plainText.toCharArray();
+           // Mảng để lưu văn bản gốc đã được thêm ký tự 'Z' nếu cần
+           char[] nplaint = new char[100];
+           int n = 0;
+
+           // Sao chép văn bản gốc vào mảng nplaint và thêm ký tự 'Z' nếu cần
+           for (int i = 0; i < plaint.length; i++) {
+               nplaint[n++] = plaint[i];
+           }
+           if (n % nkey.length != 0) {
+               while (n % nkey.length != 0) {
+                   nplaint[n++] = 'Z';
+               }
+           }
+
+           // Tạo ma trận để lưu trữ văn bản gốc
+           char[][] maTran = new char[n / nkey.length][nkey.length];
+           // Mảng để lưu kết quả mã hóa
+           char kq[] = new char[n];
+           int skq = 0;
+           int k = 0;
+
+           // Điền văn bản gốc vào ma trận theo hàng
+           for (int i = 0; i < n / nkey.length; i++) {
+               for (int j = 0; j < nkey.length; j++) {
+                   maTran[i][j] = nplaint[k];
+                   k++;
+               }
+           }
+
+           // Đọc các cột theo thứ tự xác định bởi khóa
+           for (int i = 0; i < nkey.length; i++) {
+               // Tìm vị trí của cột có ký tự nhỏ nhất trong khóa
+               int luu = timViTriMin(nkey);
+               // Đọc các ký tự trong cột đó theo hàng
+               for (int j = 0; j < n / nkey.length; j++) {
+                   kq[skq++] = maTran[j][luu];
+               }
+               // Đánh dấu cột đã đọc bằng ký tự ']'
+               nkey[luu] = (char) (91);
+           }
+
+           //Đưa vào hàm kết quả bằng cách gán mảng kết quả vào
+           cypher = new String(kq);
     }
         //Đây là hàm giải mã decryption của ChuyenDichDong
 	public void decryption_ChuyenDichDong()
         {
-            char[] nkey = key.toCharArray();
-		char[] plaint = plainText.toCharArray();
-		char[] nplaint = new char[100];
-		int n = 0;
-		for (int i = 0; i < plaint.length; i++)
-			nplaint[n++] = plaint[i];
-		if (n % nkey.length != 0)
-			while (n % nkey.length != 0)
-				nplaint[n++] = 'Z';
-		char kq[] = new char[n];
-		int skq = 0;
-		char[][] maTran = new char[n / nkey.length][nkey.length];
-		int k = 0;
-		for (int i = 0; i < nkey.length; i++) {
-			int luu = timViTriMin(nkey);
-			for (int j = 0; j < n / nkey.length; j++)
-                        {
-                            maTran[j][luu] = nplaint[k++];                           
-                        }
-			nkey[luu] = (char) (91);
-		}
-		for (int i = 0; i < n / nkey.length; i++)
-			for (int j = 0; j < nkey.length; j++) {
-				kq[skq++] = maTran[i][j];
-			}
-		cypher = new String(kq);
+           // Chuyển khóa và văn bản gốc thành mảng ký tự
+           char[] nkey = key.toCharArray();
+           char[] plaint = plainText.toCharArray();
+           char[] nplaint = new char[100];
+           int n = 0;
+
+           // Sao chép văn bản gốc vào mảng nplaint và thêm ký tự 'Z' để đảm bảo độ dài chia hết cho độ dài khóa
+           for (int i = 0; i < plaint.length; i++)
+               nplaint[n++] = plaint[i];
+           if (n % nkey.length != 0)
+               while (n % nkey.length != 0)
+                   nplaint[n++] = 'Z';
+
+           // Tạo mảng để lưu kết quả mã hóa và mảng 2D để lưu ma trận khóa
+           char kq[] = new char[n];
+           int skq = 0;
+           char[][] maTran = new char[n / nkey.length][nkey.length];
+           int k = 0;
+
+           // Điền ma trận khóa bằng cách lấy từng ký tự từ văn bản gốc theo thứ tự tăng dần của khóa
+           for (int i = 0; i < nkey.length; i++) {
+               int luu = timViTriMin(nkey); // Tìm vị trí của ký tự nhỏ nhất trong khóa
+               for (int j = 0; j < n / nkey.length; j++)
+                   maTran[j][luu] = nplaint[k++];
+               nkey[luu] = (char) (91); // Đánh dấu ký tự đã sử dụng trong khóa
+           }
+
+           // In ra ma trận khóa và lấy các ký tự từ ma trận để tạo ciphertext
+           for (int i = 0; i < n / nkey.length; i++)
+               for (int j = 0; j < nkey.length; j++) {
+                   System.out.print(maTran[i][j] + "");
+                   kq[skq++] = maTran[i][j];
+               }
+
+           // Chuyển mảng ký tự kết quả thành chuỗi
+           cypher = new String(kq);
         }
 }
