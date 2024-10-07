@@ -12,7 +12,8 @@ public class Encryption_BLL {
 	private String cypher;
 
 	//Tạo constructor Encryption_Ceasar_model với giá trị rỗng để khởi tạo ban đầu không có giá trị
-	public Encryption_BLL() {	
+	public Encryption_BLL() {
+           // this.cypher="";
 	}
         
         //Bên dưới là các hàm getter và setter để lấy giá trị và đặt giá trị từ 3 biến đã khai báo bên trên

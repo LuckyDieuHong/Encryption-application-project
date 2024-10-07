@@ -350,7 +350,7 @@ public class Encryption_GUI extends JFrame{
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
-                this.model.setCypher("");
+               // this.model.setCypher("");
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && isInteger(key))
