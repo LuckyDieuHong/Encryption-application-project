@@ -1,9 +1,9 @@
 //Khai báo package hochiminh.model
 package encryption.business_logic_layer;
 
-import javax.swing.JOptionPane;
 
-public class Encryption_Ceasar_BLL {
+
+public class Encryption_BLL {
         //Khai báo Plaintext để lưu trữ giá trị plantext muốn mã hóa hoặc giải mã
 	private String plainText;
         //Khai báo key để lưu trữ giá trị key
@@ -12,7 +12,7 @@ public class Encryption_Ceasar_BLL {
 	private String cypher;
 
 	//Tạo constructor Encryption_Ceasar_model với giá trị rỗng để khởi tạo ban đầu không có giá trị
-	public Encryption_Ceasar_BLL() {	
+	public Encryption_BLL() {	
 	}
         
         //Bên dưới là các hàm getter và setter để lấy giá trị và đặt giá trị từ 3 biến đã khai báo bên trên
@@ -156,14 +156,94 @@ public class Encryption_Ceasar_BLL {
             
         }
         
+        
+        public int timViTriMin(char[] nkey) {
+            int luu = 0;
+            int min = nkey[0];
+            for (int i = 1; i < nkey.length; i++)
+            {
+		if (nkey[i] < min) 
+                {
+                    luu = i;
+                    min = nkey[i];
+		}
+            }
+            return luu;
+	}
+        
         //Đây là hàm mã hóa encryption của ChuyenDichDong
         public void encryption_ChuyenDichDong()
         {
-            
-        }
+            char[] nkey = key.toCharArray();
+            char[] plaint = plainText.toCharArray();
+            char[]nplaint =new char[100];
+            int n=0;
+            for(int i=0;i<plaint.length;i++)
+                nplaint[n++]=plaint[i];
+                if(n%nkey.length!=0)
+                {
+                    while(n%nkey.length!=0)
+                    {
+                        nplaint[n++]='Z';                    
+                    }
+                }
+		char[][] maTran = new char[n/nkey.length][nkey.length];
+		int k=0;
+		for(int i=0;i<n/nkey.length;i++)
+                {
+                    for(int j=0;j<nkey.length;j++) 
+                    {
+                        maTran[i][j]=nplaint[k];
+			k++;
+                    }
+                }
+			
+		for(int i=0;i<nkey.length;i++)
+		{
+			int luu=timViTriMin(nkey);
+			for (int j = 0; j < n/nkey.length; j++)
+			System.out.print(maTran[j][luu]);
+			nkey[luu]= (char)(91);
+		}
+                
+            this.cypher = new String(nplaint);    
+//            char totalNumberOfElements = 0;    
+//            for (char[] numbers : maTran)
+//            {
+//                totalNumberOfElements += numbers.length;
+//            }
+//            char[] actual = new char[totalNumberOfElements];
+//            int position = 0;
+//            for (char[] numbers : maTran ){
+//                for (char number : numbers) {
+//                    actual[position] = number;
+//                     ++position;
+//                } 
+        
+    }
         //Đây là hàm giải mã decryption của 
 	public void decryption_ChuyenDichDong()
         {
-            
+            char[] nkey = key.toCharArray();
+		char[] plaint = cypher.toCharArray();
+		char[]nplaint =new char[100];
+		int n=0;
+		for(int i=0;i<plaint.length;i++)
+		nplaint[n++]=plaint[i];
+		if(n%nkey.length!=0)
+			while(n%nkey.length!=0)
+				nplaint[n++]='Z';
+		char[][] maTran = new char[n/nkey.length][nkey.length];
+		int k=0;
+		for(int i=0;i<nkey.length;i++)
+		{
+			int luu=timViTriMin(nkey);
+			for (int j = 0; j < n/nkey.length; j++)
+				maTran[j][luu]=nplaint[k++];
+			nkey[luu]= (char)(91);
+		}
+		for(int i=0;i<n/nkey.length;i++)
+			for(int j=0;j<nkey.length;j++)
+				System.out.print(maTran[i][j]+"");
         }
 }

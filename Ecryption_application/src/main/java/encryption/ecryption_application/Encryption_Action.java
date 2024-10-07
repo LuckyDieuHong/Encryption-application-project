@@ -5,13 +5,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 //Thêm thư viện ActionListener để triển khai các method trong interface của ActionListener
 import java.awt.event.ActionListener;
-//Lớp Encryption_Ceasar_Action implements lại các method từ ActionListener
-public class Encryption_Ceasar_Action implements ActionListener{
+//Lớp Encryption_Action implements lại các method từ ActionListener
+public class Encryption_Action implements ActionListener{
 	//Khai báo biến view
-	private Encryption_Ceasar_GUI view;
+	private Encryption_GUI view;
 	
         //Tạo constructor để thêm các hoạt động khi bấm các nút nhấn
-	public Encryption_Ceasar_Action(Encryption_Ceasar_GUI view_Button) {
+	public Encryption_Action(Encryption_GUI view_Button) {
                 //Có nghĩa là biến view sẽ được gán biến view_Button là nút bấm
 		this.view = view_Button;
 	}
