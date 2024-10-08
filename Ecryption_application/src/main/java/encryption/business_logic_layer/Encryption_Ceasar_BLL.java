@@ -1,6 +1,7 @@
 //Khai báo package hochiminh.model
 package encryption.business_logic_layer;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 public class Encryption_Ceasar_BLL {
@@ -10,7 +11,7 @@ public class Encryption_Ceasar_BLL {
 	private String key;
         //Khai báo Cypher để lưu trữ kết quả trả về là đoạn mã đã mã hóa hoặc đoạn mã đã giải mã
 	private String cypher;
-
+        private String random_key;
 	//Tạo constructor Encryption_Ceasar_model với giá trị rỗng để khởi tạo ban đầu không có giá trị
 	public Encryption_Ceasar_BLL() {	
 	}
@@ -34,6 +35,7 @@ public class Encryption_Ceasar_BLL {
 	public void setCypher(String cypher) {
 		this.cypher = cypher;
 	}
+        
 	
 	//Đây là hàm mã hóa encryption của Ceasar
 	public void encrytion_Ceasar(){
@@ -126,7 +128,132 @@ public class Encryption_Ceasar_BLL {
         //Đây là hàm mã hóa encryption của 
         public void encryption_Playfair()
         {
+             char[][] keyMatrix = new char[5][5] ;
+        String plainText = this.plainText;
+        String key = this.key;
+        String cipherText = "";
+        int[] indexUppercaseCharacter = new int[plainText.length()];
+        Arrays.fill(indexUppercaseCharacter, -1);
+
+        //Handle moduleKey
+        key = key.toLowerCase();
+
+        for(int i = 0 ; i < key.length() ; i++) 
+        {
+            //Remove all character apear 2nd time or more
+            if(key.indexOf(key.charAt(i)) != i) 
+                key = key.substring(0, i).concat(key.substring(i-- +1 , key.length()));
+        }
+        
+        //Add remaining character into module key
+        for(int i = 'a' ; i <= 'z' ; i++)
+        {
+            if(!key.contains(Character.toString(i)) &&
+                i != 'j') 
+                key = key.concat(Character.toString(i));
+        }
+
+        //Add key into Maxtrix
+        for(int i = 0 ; i < 5 ; i++)
+        {
+            for(int j = 0 ; j < 5 ; j++)
+                keyMatrix[i][j] = key.charAt(i*5 + j);
+        }
+
+        //Handle plaintext
+        int indexX ;
+        int indexY ;
+        boolean flag ;
+
+        //Check duplicate chacracter
+        for(int i = 0 ; i < plainText.length() - 1 ; i++)
+        {
+            if(plainText.charAt(i) == plainText.charAt(i+1))
+                plainText = plainText.substring(0, i+1)
+                                    .concat("z")
+                                    .concat(plainText.substring(i + 1, plainText.length()));
+
+        }
+
+        //Check length
+        if(plainText.length() % 2 != 0) 
+            plainText = plainText.concat("z");
+
+        //Save Index of uppercase character
+        int index = 0;
+        for(int i = 0 ; i < plainText.length() ; i++)
+        {
+            if( Character.isLetter(plainText.charAt(i)) &&
+                Character.isUpperCase(plainText.charAt(i)))
+                    indexUppercaseCharacter[index++] = i;
+        }
+
+        //LowerCase String
+        plainText = plainText.toLowerCase();
+
+        //Handle encrypt
+        for(int i = 0 ; i < plainText.length() - 1 ; i+=2)
+        {
+            indexX = -1;
+            indexY = -1;
+            flag = false;
             
+            for(int m = 0 ; m < 5 ; m++)
+            {
+                for(int n = 0 ; n < 5 ; n++)
+                {
+                    if(plainText.charAt(i) == keyMatrix[m][n] && !flag)
+                    {
+                        indexX = m;
+                        indexY = n;
+                        flag = true;
+                        m = 0;
+                        n = 0;
+                    }
+
+                    else if(plainText.charAt(i+1) == keyMatrix[m][n]  && flag) 
+                    {
+                        //Same row
+                        if(indexX == m )
+                        {
+                            cipherText += (indexY == 4) 
+                                ? Character.toString(keyMatrix[indexX][0]) 
+                                : Character.toString(keyMatrix[indexX][indexY+1]);
+                            cipherText += (n == 4) 
+                                ? Character.toString(keyMatrix[m][0]) 
+                                : Character.toString(keyMatrix[m][n+1]);
+                        }
+
+                        //Same column
+                        else if(indexY == n)
+                        {
+                            cipherText += (indexX == 4) 
+                                ? Character.toString(keyMatrix[0][indexY]) 
+                                : Character.toString(keyMatrix[indexX+1][indexY]);
+                            cipherText += (m == 4) 
+                                ? Character.toString(keyMatrix[0][n]) 
+                                : Character.toString((keyMatrix[m+1][n]));
+                        }
+                        //Different rows and columns
+                        else
+                        {
+                            cipherText += Character.toString(keyMatrix[indexX][n]);
+                            cipherText += Character.toString(keyMatrix[m][indexY]);
+                        }
+
+                        //Stop loop
+                        m=5;
+                        n=5;     
+                    }
+                }
+            }
+        }
+
+        //Recovery uppercase character
+        for(int i = 0 ; indexUppercaseCharacter[i] != -1 ; i++)
+            cipherText = cipherText.replace(cipherText.charAt(indexUppercaseCharacter[i]), Character.toUpperCase(cipherText.charAt(indexUppercaseCharacter[i])));
+     
+        this.cypher = cipherText;
         }
         //Đây là hàm giải mã decryption của 
 	public void decryption_Playfair()
