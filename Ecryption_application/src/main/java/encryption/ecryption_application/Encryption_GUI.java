@@ -1,7 +1,7 @@
 //Khai báo pakage hochiminh.view
 package encryption.ecryption_application;
 //Thêm thư viện JFrame để tạo và quản lý cửa sổ người dùng 
-import encryption.business_logic_layer.Encryption_Ceasar_BLL;
+import encryption.business_logic_layer.Encryption_BLL;
 import javax.swing.JFrame;
 //Thêm thư viện BorderLayout để tạo layout Đông, Tây, Nam, Bắc, Center
 import java.awt.BorderLayout;
@@ -25,10 +25,10 @@ import javax.swing.JTextArea;
 //Import pakage model để lấy các method, dữ liệu user nhập vào
 
 
-//Lớp Encryption_Ceasar_GUI kế thừa lại JFrame có nghĩa mọi method trong JFrame đều có thể lấy ra vào trong hàm Encryption_Ceasar_GUI
-public class Encryption_Ceasar_GUI extends JFrame{
+//Lớp Encryption_GUI kế thừa lại JFrame có nghĩa mọi method trong JFrame đều có thể lấy ra vào trong hàm Encryption_GUI
+public class Encryption_GUI extends JFrame{
         //Khai báo model để phục vụ lấy dữ liệu và gọi hàm từ model
-	private Encryption_Ceasar_BLL model;
+	private Encryption_BLL model;
         
         //Khai báo area_PlainText và key để nhập chuỗi vào
 	private JTextArea area_PlainText;
@@ -79,11 +79,11 @@ public class Encryption_Ceasar_GUI extends JFrame{
         this.button_bang_chu_Don = button_bang_chu_Don;
     }
         
-        //Tạo constructor Encryption_Ceasar_GUI, khởi tạo biến model và gọi hàm init
-	public Encryption_Ceasar_GUI()
+        //Tạo constructor Encryption_GUI, khởi tạo biến model và gọi hàm init
+	public Encryption_GUI()
 	{
                 //Khởi tạo biến model với mục đích sẽ gọi các giá trị và method từ lớp Encryption_Ceasar_model ra
-		this.model = new Encryption_Ceasar_BLL();
+		this.model = new Encryption_BLL();
                 //Gọi hàm init để khởi tạo các thành phần có thể nhìn thấy trong giao diện
 		this.init();
 	}
@@ -106,7 +106,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		Font font = new Font("Arial",Font.BOLD,30);
                 
                 //Khai báo biến action để xem các trạng thái bấm nút của chương trình
-		Encryption_Ceasar_Action action = new Encryption_Ceasar_Action(this);
+		Encryption_Action action = new Encryption_Action(this);
                 
                 //Khởi tạo các nút nhấn mã hóa với các tên tương ứng
                 button_Ceasar = new JButton("Ceasar");
@@ -206,14 +206,14 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		JButton button_encryption = new JButton("Encryption");
                 //Đặt kiểu chữ cho biến button_encryption
 		button_encryption.setFont(font);
-                //Thêm hàm addActionListener với mục đích khi bấm vào nút Encryption thì bên lớp Encryption_Ceasar_Action sẽ làm gì
+                //Thêm hàm addActionListener với mục đích khi bấm vào nút Encryption thì bên lớp Encryption_Action sẽ làm gì
 		button_encryption.addActionListener(action);
                 
 		//Tạo và khởi tạo nút nhấn Decryption
 		JButton button_decryption = new JButton("Decryption");
                 //Đặt kiểu chữ cho biến Decryption
 		button_decryption.setFont(font);
-                //Thêm hàm addActionListener với mục đích khi bấm vào nút Decryption thì bên lớp Encryption_Ceasar_Action sẽ làm gì
+                //Thêm hàm addActionListener với mục đích khi bấm vào nút Decryption thì bên lớp Encryption_Action sẽ làm gì
 		button_decryption.addActionListener(action);
 		
                 //Tạo biến panel_bottom đẻ lưu trữ các nút bấm
@@ -251,7 +251,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
             }
         }
 
-        //Hàm mã hóa được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encrytion_Ceasar(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -286,7 +286,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.encrytion_Ceasar();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -312,7 +312,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
 	
-        //Hàm giải mã được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm giải mã được sử dụng khi lớp Encryption_Action gọi
 	public void decryption_Ceasar(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -346,7 +346,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.decryption_Ceasar();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -372,7 +372,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
         
-        //Hàm mã hóa được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encryption_BangChuDon(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -406,7 +406,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.encryption_BangChuDon();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -432,7 +432,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
 	
-        //Hàm giải mã được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm giải mã được sử dụng khi lớp Encryption_Action gọi
 	public void decryption_BangChuDon(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -466,7 +466,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.decryption_BangChuDon();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -492,7 +492,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
         
-        //Hàm mã hóa được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encryption_Playfair(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -526,7 +526,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.encryption_Playfair();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -553,7 +553,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
 	
-        //Hàm giải mã được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm giải mã được sử dụng khi lớp Encryption_Action gọi
 	public void decryption_Playfair(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -587,7 +587,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.decryption_Playfair();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -613,7 +613,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
         
-        //Hàm mã hóa được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encryption_Vigenere(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -647,7 +647,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.encryption_Vigenere();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -673,7 +673,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
 	
-        //Hàm giải mã được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm giải mã được sử dụng khi lớp Encryption_Action gọi
 	public void decryption_Vigenere(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -707,7 +707,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.decryption_Vigenere();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
@@ -733,7 +733,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
         
-        //Hàm mã hóa được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encryption_ChuyenDichDong(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -793,7 +793,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
                 }
 	}
 	
-        //Hàm giải mã được sử dụng khi lớp Encryption_Ceasar_Action gọi
+        //Hàm giải mã được sử dụng khi lớp Encryption_Action gọi
 	public void decryption_ChuyenDichDong(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
 		String plainText = area_PlainText.getText();
@@ -827,7 +827,7 @@ public class Encryption_Ceasar_GUI extends JFrame{
 		this.model.setKey(key);
                 //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
 		this.model.decryption_ChuyenDichDong();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp model
+                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
 		this.area_CypherText.setText(this.model.getCypher());
                 //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
                 //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
