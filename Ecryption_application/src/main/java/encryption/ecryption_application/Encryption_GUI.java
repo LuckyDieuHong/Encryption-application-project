@@ -215,6 +215,13 @@ public class Encryption_GUI extends JFrame{
 		button_decryption.setFont(font);
                 //Thêm hàm addActionListener với mục đích khi bấm vào nút Decryption thì bên lớp Encryption_Action sẽ làm gì
 		button_decryption.addActionListener(action);
+                
+                //Tạo và khởi tạo nút nhấn Random key
+		JButton button_random_key = new JButton("Random key");
+                //Đặt kiểu chữ cho biến button_random_key
+		button_random_key.setFont(font);
+                //Thêm hàm addActionListener với mục đích khi bấm vào nút Encryption thì bên lớp Encryption_Action sẽ làm gì
+		button_random_key.addActionListener(action);
 		
                 //Tạo biến panel_bottom đẻ lưu trữ các nút bấm
 		JPanel panel_bottom = new JPanel();
@@ -222,6 +229,8 @@ public class Encryption_GUI extends JFrame{
 		panel_bottom.setLayout(new BorderLayout());
                 //Đặt nút Encryption bên phía Tây
 		panel_bottom.add(button_encryption,BorderLayout.WEST);
+                //Đặt nút Random key ở giữa
+		panel_bottom.add(button_random_key,BorderLayout.CENTER);
                 //Đặt nút Decryption bên phía Đông
 		panel_bottom.add(button_decryption,BorderLayout.EAST);
 
@@ -251,6 +260,12 @@ public class Encryption_GUI extends JFrame{
             }
         }
 
+        public void randomKey()
+        {
+            this.model.getRandomKey();
+            this.area_Key.setText(this.model.getKey());
+        }
+        
         //Hàm mã hóa được sử dụng khi lớp Encryption_Action gọi
 	public void encrytion_Ceasar(){
                 //Tạo và khởi tạo biến plainText để lưu trữ giá trị của ô plaintext sau khi user nhập và nhấn nút Encrytion bằng cách lấy area_PlainText.getText()
@@ -280,17 +295,33 @@ public class Encryption_GUI extends JFrame{
                 //Trường hợp thỏa mãn 2 điều kiện Ceasar là PlainText là String và Key là Interger
                 else if(!isInteger(plainText) && isInteger(key))
                 {
-                //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
-		this.model.setPlainText(plainText);
-                //Đặt giá trị key bên trong model bằng cách lấy giá trị từ biến key
-		this.model.setKey(key);
-                //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
-		this.model.encrytion_Ceasar();
-                //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
-		this.area_CypherText.setText(this.model.getCypher());
-                //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
-                //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
-                this.model.setCypher("");
+                    if(!this.model.getKey().equals(""))
+                    {
+                    //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
+                    this.model.setPlainText(plainText);
+                    //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
+                    this.model.encrytion_Ceasar();
+                    //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
+                    this.area_CypherText.setText(this.model.getCypher());
+                    //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                    //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                    this.model.setCypher("");
+                    }
+                    else
+                    {
+                    //Đặt giá trị plainText bên trong model bằng cách lấy giá trị từ biến plainText
+                    this.model.setPlainText(plainText);
+                    //Đặt giá trị key bên trong model bằng cách lấy giá trị từ biến key
+                    this.model.setKey(key);
+                    //Gọi hàm encrytion để bắt đầu công đoạn mã hóa 
+                    this.model.encrytion_Ceasar();
+                    //Hiển thị kết quả mã hóa bằng cách lấy giá trị Cypher từ bên lớp Encryption_BLL
+                    this.area_CypherText.setText(this.model.getCypher());
+                    //Sau khi hiển thị kết quả thì set lại biến Cypher "" nhầm mục đích không lưu giá trị 
+                    //nếu các hàm khác gọi mà hàm bị trống thì không hiển thị kết quả cũ ra màn hình
+                    this.model.setCypher("");
+                    }
+                
                 }
                 //Trường hợp nếu plainText nhập vào là số nguyên
                 else if (isInteger(plainText) && isInteger(key))

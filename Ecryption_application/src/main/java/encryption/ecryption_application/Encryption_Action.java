@@ -22,7 +22,11 @@ public class Encryption_Action implements ActionListener{
                 //Khởi tạo biến src với giá trị là tên của nút được bấm
 		String src = e.getActionCommand();
                 //So sánh nếu nút được bấm là nút Encryption
-                if( src.equals("Encryption") || src.equals("Decryption"))
+                if(src.equals("Random key"))
+                {
+                    this.view.randomKey();
+                }
+                else if( src.equals("Encryption") || src.equals("Decryption"))
                 {
                     //Xét điều kiện nếu nút nhấn là Encryption và nút vừa được nhấn có mùa LIGHT_GRAY thì bắt đầu mã hóa
                     if(src.equals("Encryption") && this.view.getButton_Ceasar().getBackground().equals(Color.LIGHT_GRAY))
@@ -36,7 +40,7 @@ public class Encryption_Action implements ActionListener{
                         this.view.decryption_Ceasar();
                     }
                     //Xét điều kiện nếu nút nhấn là Encryption và nút vừa được nhấn có mùa LIGHT_GRAY thì bắt đầu mã hóa
-                    if(src.equals("Encryption") && this.view.getButton_Vigenere().getBackground().equals(Color.LIGHT_GRAY))
+                    else if(src.equals("Encryption") && this.view.getButton_Vigenere().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Mã hóa 
                         this.view.encryption_Vigenere();
@@ -47,7 +51,7 @@ public class Encryption_Action implements ActionListener{
                         this.view.decryption_Vigenere();
                     }
                     //Xét điều kiện nếu nút nhấn là Encryption và nút vừa được nhấn có mùa LIGHT_GRAY thì bắt đầu mã hóa
-                    if(src.equals("Encryption") && this.view.getButton_chuyen_dich_dong().getBackground().equals(Color.LIGHT_GRAY))
+                    else if(src.equals("Encryption") && this.view.getButton_chuyen_dich_dong().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Mã hóa 
                         this.view.encryption_ChuyenDichDong();
@@ -59,7 +63,7 @@ public class Encryption_Action implements ActionListener{
                     }
                     
                     //Xét điều kiện nếu nút nhấn là Encryption và nút vừa được nhấn có mùa LIGHT_GRAY thì bắt đầu mã hóa
-                    if(src.equals("Encryption") && this.view.getButton_Playfair().getBackground().equals(Color.LIGHT_GRAY))
+                    else if(src.equals("Encryption") && this.view.getButton_Playfair().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Mã hóa 
                         this.view.encryption_Playfair();
@@ -71,7 +75,7 @@ public class Encryption_Action implements ActionListener{
                     }
                     
                     //Xét điều kiện nếu nút nhấn là Encryption và nút vừa được nhấn có mùa LIGHT_GRAY thì bắt đầu mã hóa
-                    if(src.equals("Encryption") && this.view.getButton_bang_chu_Don().getBackground().equals(Color.LIGHT_GRAY))
+                    else if(src.equals("Encryption") && this.view.getButton_bang_chu_Don().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Mã hóa 
                         this.view.encryption_BangChuDon();
