@@ -68,7 +68,7 @@ public class Encryption_Action implements ActionListener{
                     else if(src.equals("Decryption") && this.view.getButton_Playfair().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Giải mã 
-                        this.view.encryption_Playfair();
+                        this.view.decryption_Playfair();
                     }
                     //Xét điều kiện nếu nút nhấn là Random key và nút vừa được nhấn là mùa LIGHT_GRAY thì gọi hàm random key
                     else if(src.equals("Random key") && this.view.getButton_bang_chu_Don().getBackground().equals(Color.LIGHT_GRAY))
@@ -85,7 +85,7 @@ public class Encryption_Action implements ActionListener{
                     else if(src.equals("Decryption") && this.view.getButton_bang_chu_Don().getBackground().equals(Color.LIGHT_GRAY))
                     {
                         //Giải mã 
-                        this.view.encryption_BangChuDon();
+                        this.view.decryption_BangChuDon();
                     }
                 }
                 //So sánh nếu nút vừa nhấn là Ceasar thì thay đổi background nút Ceasar

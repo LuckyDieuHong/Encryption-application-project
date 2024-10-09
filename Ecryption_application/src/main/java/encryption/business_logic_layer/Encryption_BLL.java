@@ -140,7 +140,7 @@ public class Encryption_BLL {
         String plainText = this.plainText;
         String key = this.key;
         String cipherText = "";
-        int[] indexUppercaseCharacter = new int[plainText.length()];
+        int[] indexUppercaseCharacter = new int[plainText.length()+1];
         Arrays.fill(indexUppercaseCharacter, -1);
 
         //Handle moduleKey
@@ -260,7 +260,7 @@ public class Encryption_BLL {
         //Recovery uppercase character
         for(int i = 0 ; indexUppercaseCharacter[i] != -1 ; i++)
             cipherText = cipherText.replace(cipherText.charAt(indexUppercaseCharacter[i]), Character.toUpperCase(cipherText.charAt(indexUppercaseCharacter[i])));
-     
+        //System.out.println(cipherText);
         this.cypher = cipherText;            
         }
         //Đây là hàm giải mã decryption của 
@@ -270,7 +270,7 @@ public class Encryption_BLL {
         String plainText = this.plainText;
         String key = this.key;
         String cipherText = "";
-        int[] indexUppercaseCharacter = new int[plainText.length()];
+        int[] indexUppercaseCharacter = new int[plainText.length()+1];
         Arrays.fill(indexUppercaseCharacter, -1);
 
         //Handle moduleKey
@@ -404,35 +404,35 @@ public class Encryption_BLL {
             }
          
             }
-        String result = Arrays.toString(key);
-        this.key = result.substring(1, result.length()-1);
+        
+        this.key = key[0].concat("," ).concat(key[1]);
+
         }   
         
         //Đây là hàm mã hóa encryption của BangChuDon
         public void encryption_BangChuDon()
         {
-        String[] moduleKey = this.key.split("");
+        String modulePlaintext = this.plainText;
+        String[] moduleKey = this.key.split(",");
+        //String[] moduleKey = new String[]{this.key};
+        //String[] moduleKey = this.key;
         String cipherText = "";
         int index = 0;
-        int[] indexUppercaseCharacter = new int[this.plainText.length()];
+        int[] indexUppercaseCharacter = new int[modulePlaintext.length()+1];
         Arrays.fill(indexUppercaseCharacter, -1);
-        for(int i = 0 ; i < this.plainText.length() ; i++)
+        for(int i = 0 ; i < modulePlaintext.length() ; i++)
         {
-            if( Character.isLetter(this.plainText.charAt(i)) &&
-                Character.isUpperCase(this.plainText.charAt(i)))
+            if( Character.isLetter(modulePlaintext.charAt(i)) &&
+                Character.isUpperCase(modulePlaintext.charAt(i)))
                     indexUppercaseCharacter[index++] = i;
         }
 
-        this.plainText = this.plainText.toLowerCase();
-
-        for(int i = 0 ; i < this.plainText.length() ; i++)
+        modulePlaintext = modulePlaintext.toLowerCase();
+        moduleKey[0] = moduleKey[0].toLowerCase();
+        moduleKey[1] = moduleKey[1].toLowerCase();
+        for(int i = 0 ; i < modulePlaintext.length() ; i++)
         {
-           index = moduleKey[0].indexOf(this.plainText.charAt(i));
-//           if(index==-1)
-//           {
-//               System.out.println("Error");
-//               break;
-//           }
+           index = moduleKey[0].indexOf(modulePlaintext.charAt(i));
            cipherText += Character.toString(moduleKey[1].charAt(index));
         }
 
@@ -443,10 +443,35 @@ public class Encryption_BLL {
      
         this.cypher = cipherText;
         }
-        //Đây là hàm giải mã decryption của 
+        //Đây là hàm giải mã decryption của BangChuDon
 	public void decryption_BangChuDon()
         {
-            
+        String modulePlaintext = this.plainText;
+        String[] moduleKey = this.key.split(",");
+        String cipherText = "";
+        int index = 0;
+        int[] indexUppercaseCharacter = new int[modulePlaintext.length()+1];
+        Arrays.fill(indexUppercaseCharacter, -1);
+        for(int i = 0 ; i < modulePlaintext.length() ; i++)
+        {
+            if( Character.isLetter(modulePlaintext.charAt(i)) &&
+                Character.isUpperCase(modulePlaintext.charAt(i)))
+                    indexUppercaseCharacter[index++] = i;
+        }
+
+        modulePlaintext = modulePlaintext.toLowerCase();
+        moduleKey[0] = moduleKey[0].toLowerCase();
+        moduleKey[1] = moduleKey[1].toLowerCase();
+        for(int i = 0 ; i < modulePlaintext.length() ; i++)
+        {
+           index = moduleKey[1].indexOf(modulePlaintext.charAt(i));
+           cipherText += Character.toString(moduleKey[0].charAt(index));
+        }
+        //Recovery uppercase character
+        for(int i = 0 ; indexUppercaseCharacter[i] != -1 ; i++)
+            cipherText = cipherText.replace(cipherText.charAt(indexUppercaseCharacter[i]), Character.toUpperCase(cipherText.charAt(indexUppercaseCharacter[i])));
+     
+        this.cypher = cipherText;
         }
         
         
